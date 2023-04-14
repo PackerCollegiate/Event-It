@@ -109,3 +109,12 @@ Traceback (most recent call last):
 TypeError: can only concatenate str (not "datetime.date") to str
 2023-04-13 21:30:08,653 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
 2023-04-13 21:30:54,243 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
+2023-04-13 21:36:54,778 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:33:44,649 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:43:15,887 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:43:38,911 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:44:32,593 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:46:45,914 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:47:47,824 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:49:04,169 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-14 08:49:49,887 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]

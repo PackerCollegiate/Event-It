@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, DateField
-from wtforms.fields import DateField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, DateField, FileField
+from wtforms.fields import DateField, FileField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from app.models import User
 
@@ -19,6 +19,7 @@ class LoginForm(FlaskForm):
 class EventForm(FlaskForm):
     eventName = StringField('Event Name', validators=[DataRequired()])
     eventDate = DateField('Date', validators=[DataRequired()], id='datepick')
+    eventImage = FileField("Event Image", validators=[DataRequired(['jpg','jpeg','png'])])
     submit = SubmitField('Create Event')
 
 class RegistrationForm(FlaskForm):
