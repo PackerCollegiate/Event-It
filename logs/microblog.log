@@ -1,4 +1,4 @@
-2023-04-13 21:15:38,069 ERROR: Exception on /create_event [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+2023-04-28 13:14:44,457 ERROR: Exception on /index [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,109 +12,50 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/EventIt/app/routes.py", line 51, in create_event
-    return render_template('create_event.html', title='Create Event', form=form, posts=posts.items)
-                                                                                       ^^^^^
-NameError: name 'posts' is not defined
-2023-04-13 21:16:10,281 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:16:21,730 ERROR: Exception on /create_event [POST] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 2120, in _entity_namespace_key
-    return getattr(ns, key)  # type: ignore
-           ^^^^^^^^^^^^^^^^
-AttributeError: type object 'User' has no attribute 'eventName'
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/EventIt/app/routes.py", line 44, in create_event
-    event_name = User.query.filter_by(eventName=form.eventName.data, eventDate=form.eventDate.data)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 1998, in filter_by
-    clauses = [
-              ^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 1999, in <listcomp>
-    _entity_namespace_key(from_entity, key) == value
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 2122, in _entity_namespace_key
-    raise exc.InvalidRequestError(
-sqlalchemy.exc.InvalidRequestError: Entity namespace for "user" has no property "eventName"
-2023-04-13 21:20:16,446 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:20:26,814 ERROR: Exception on /create_event [POST] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 2120, in _entity_namespace_key
-    return getattr(ns, key)  # type: ignore
-           ^^^^^^^^^^^^^^^^
-AttributeError: type object 'User' has no attribute 'eventName'
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/EventIt/app/routes.py", line 44, in create_event
-    event_name = User.query.filter_by(eventName=form.eventName.data, eventDate=form.eventDate.data)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 1998, in filter_by
-    clauses = [
-              ^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 1999, in <listcomp>
-    _entity_namespace_key(from_entity, key) == value
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/sql/base.py", line 2122, in _entity_namespace_key
-    raise exc.InvalidRequestError(
-sqlalchemy.exc.InvalidRequestError: Entity namespace for "user" has no property "eventName"
-2023-04-13 21:21:47,380 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:28:28,658 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:29:37,855 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:29:49,425 ERROR: Exception on /create_event [POST] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/EventIt/app/routes.py", line 44, in create_event
-    post = Post(body=form.eventName.data + form.eventDate.data, author=current_user)
-                     ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
-TypeError: can only concatenate str (not "datetime.date") to str
-2023-04-13 21:30:08,653 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:30:54,243 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/EventIt/app/__init__.py:45]
-2023-04-13 21:36:54,778 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:33:44,649 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:43:15,887 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:43:38,911 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:44:32,593 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:46:45,914 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:47:47,824 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:49:04,169 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-14 08:49:49,887 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 27, in index
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 2, in top-level template code
+    {% import 'bootstrap/wtf.html' as wtf %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block 'doc'
+    {%- block html %}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block 'html'
+    {% block body -%}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block 'body'
+    {% block content -%}
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/base.html", line 49, in block 'content'
+    {% block app_content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 11, in block 'app_content'
+    {% include '_post.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 5, in top-level template code
+    <img src="{{ post.image(70) }}" />
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'app.models.Post object' has no attribute 'image'
+2023-04-28 13:16:46,109 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-28 13:17:53,530 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-28 13:30:56,595 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-30 19:47:15,105 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]

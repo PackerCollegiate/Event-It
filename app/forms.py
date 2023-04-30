@@ -19,7 +19,7 @@ class LoginForm(FlaskForm):
 class EventForm(FlaskForm):
     eventName = StringField('Event Name', validators=[DataRequired()])
     eventDate = DateField('Date', validators=[DataRequired()], id='datepick')
-    eventImage = FileField("Event Image", validators=[DataRequired(['jpg','jpeg','png'])])
+    eventImage = FileField("Event Image",) # validators=[DataRequired(['jpg','jpeg','png'])]
     submit = SubmitField('Create Event')
 
 class RegistrationForm(FlaskForm):

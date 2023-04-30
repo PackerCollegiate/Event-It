@@ -41,10 +41,13 @@ def explore():
 def create_event():
     form = EventForm()
     if form.validate_on_submit():
-        post = Post(body=form.eventName.data + ' (' + str(form.eventDate.data) + ')', author=current_user)
+        post = Post(body=form.eventName.data + ' (' + str(form.eventDate.data) + ')', author=current_user) #, image=form.eventImage.data
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('index'))
+    def upload_file():
+        uploaded_file = request.files['file']
+        uploaded_file.save(uploaded_file.filename)
     return render_template('create_event.html', title='Create Event', form=form)
 @app.route('/songs')
 def songs():
