@@ -1,13 +1,4 @@
-2023-04-28 13:13:51,606 ERROR: Exception on /index [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 747, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such column: post.image
-
-The above exception was the direct cause of the following exception:
-
+2023-04-30 20:46:13,292 ERROR: Exception on /index [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -24,60 +15,93 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 21, in index
-    posts = current_user.followed_posts().paginate(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_sqlalchemy/query.py", line 99, in paginate
-    return QueryPagination(
-           ^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_sqlalchemy/pagination.py", line 69, in __init__
-    items = self._query_items()
-            ^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_sqlalchemy/pagination.py", line 354, in _query_items
-    out = query.limit(self.per_page).offset(self._query_offset).all()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2697, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2855, in _iter
-    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-                                                  ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2229, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2124, in _execute_internal
-    result: Result[Any] = compile_state_cls.orm_execute_statement(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 252, in orm_execute_statement
-    result = conn.execute(
-             ^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1414, in execute
-    return meth(
-           ^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 485, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1842, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2325, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
-    self.dialect.do_execute(
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 747, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.image
-[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_image AS anon_1_post_image, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id 
-FROM (SELECT post.id AS post_id, post.body AS post_body, post.image AS post_image, post.timestamp AS post_timestamp, post.user_id AS post_user_id 
-FROM post JOIN followers ON followers.followed_id = post.user_id 
-WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.image AS post_image, post.timestamp AS post_timestamp, post.user_id AS post_user_id 
-FROM post 
-WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
- LIMIT ? OFFSET ?]
-[parameters: (2, 2, 25, 0)]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 27, in index
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 2, in top-level template code
+    {% import 'bootstrap/wtf.html' as wtf %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block 'doc'
+    {%- block html %}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block 'html'
+    {% block body -%}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block 'body'
+    {% block content -%}
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/base.html", line 49, in block 'content'
+    {% block app_content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 11, in block 'app_content'
+    {% include '_post.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 15, in top-level template code
+    {% if current_user.username is not post.author.username %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateRuntimeError: No test named 'post.author.username' found.
+2023-04-30 20:46:55,897 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-30 20:53:46,999 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-30 20:53:48,709 ERROR: Exception on /user/samuel [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 119, in user
+    return render_template('user.html', user=user, posts=posts.items,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block 'doc'
+    {%- block html %}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block 'html'
+    {% block body -%}
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block 'body'
+    {% block content -%}
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/user.html", line 34, in block 'content'
+    {% include '_post.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 15, in top-level template code
+    {{ "Followed by" + user.followers.count() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can only concatenate str (not "int") to str
+2023-04-30 20:54:03,377 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]

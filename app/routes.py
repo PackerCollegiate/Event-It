@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, SnowmanForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, EventForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, EventForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post
 from werkzeug.urls import url_parse
@@ -10,9 +10,9 @@ from datetime import datetime
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    form = PostForm()
+    form = EventForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        post = Post(body=form.eventName.data + ' (' + str(form.eventDate.data) + ')', author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post is now live!')
@@ -28,6 +28,13 @@ def index():
 @app.route('/explore')
 @login_required
 def explore():
+    form = EventForm()
+    if form.validate_on_submit():
+        post = Post(body=form.eventName.data + ' (' + str(form.eventDate.data) + ')', author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
@@ -35,7 +42,7 @@ def explore():
         if posts.has_next else None
     prev_url = url_for('explore', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template("index.html", title='Explore', posts=posts.items,
+    return render_template("index.html", title='Explore', form=form, posts=posts.items,
                           next_url=next_url, prev_url=prev_url)
 @app.route('/create_event', methods=['GET', 'POST'])
 def create_event():
@@ -80,9 +87,6 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 @app.route('/snowman', methods=['GET', 'POST'])
-def snowman():
-    form = SnowmanForm()
-    return render_template('snowman.html', title='Submit Guesses', form=form)
 @app.route('/logout')
 def logout():
     logout_user()

@@ -1,4 +1,4 @@
-2023-04-28 13:14:44,457 ERROR: Exception on /index [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+2023-04-30 20:55:51,824 ERROR: Exception on /explore [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -15,9 +15,9 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 27, in index
-    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 45, in explore
+    return render_template("index.html", title='Explore', form=form, posts=posts.items,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 147, in render_template
     return _render(app, template, context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,14 +48,12 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 11, in block 'app_content'
     {% include '_post.html' %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 5, in top-level template code
-    <img src="{{ post.image(70) }}" />
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 16, in top-level template code
+    {{ user.followers.count() }}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/utils.py", line 83, in from_obj
-    if hasattr(obj, "jinja_pass_arg"):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'app.models.Post object' has no attribute 'image'
-2023-04-28 13:16:46,109 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-28 13:17:53,530 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-28 13:30:56,595 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-30 19:47:15,105 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'user' is undefined
+2023-04-30 20:56:15,078 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-04-30 20:57:33,261 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]

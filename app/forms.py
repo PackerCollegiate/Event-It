@@ -4,12 +4,6 @@ from wtforms.fields import DateField, FileField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from app.models import User
 
-class SnowmanForm(FlaskForm):
-	guess1 = StringField('Guess 1', validators=[DataRequired()])
-	guess2 = StringField('Guess 2', validators=[DataRequired()])
-	guess3 = StringField('Guess 3', validators=[DataRequired()])
-	submit = SubmitField('Submit Guesses')
-
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -56,6 +50,9 @@ class EditProfileForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
+    
+class BlankForm(FlaskForm):
+    pass
     
 class PostForm(FlaskForm):
     post = TextAreaField('Say something', validators=[

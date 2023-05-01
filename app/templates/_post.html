@@ -12,6 +12,27 @@
                 says:
                 <br>
                 {{ post.body }}
+                {{ "| Followers:" }}
+                {{ post.author.followers.count() }}
+                {% if current_user.username != post.author.username %}
+                {% if current_user.is_following(post.author) %}
+                <p>
+                    <form action="{{ url_for('unfollow', username=post.author.username) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value='Unfollow') }}
+                    </form>
+                </p>
+                {% else %}
+                    <p>
+                    <form action="{{ url_for('follow', username=post.author.username) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value='Follow') }}
+                    </form>
+                </p>
+                {% endif %}
+                {% endif %}
+                </p>
             </td>
         </tr>
     </table>
+
