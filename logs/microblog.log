@@ -1,4 +1,4 @@
-2023-04-30 20:55:51,824 ERROR: Exception on /explore [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+2023-05-23 13:23:45,024 ERROR: Exception on /explore [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -48,12 +48,20 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 11, in block 'app_content'
     {% include '_post.html' %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 16, in top-level template code
-    {{ user.followers.count() }}
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 27, in top-level template code
+    <form action="{{ url_for('subscribe', post=post.id)}}" method="post">
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.UndefinedError: 'user' is undefined
-2023-04-30 20:56:15,078 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-30 20:57:33,261 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2031, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2020, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'subscribe' with values ['post']. Did you forget to specify values ['username']?
+2023-05-23 13:29:17,604 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 13:32:19,012 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 13:35:33,656 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 13:42:29,732 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 14:09:59,334 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]

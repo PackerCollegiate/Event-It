@@ -17,16 +17,16 @@
                 {% if current_user.username != post.author.username %}
                 {% if current_user.is_following(post.author) %}
                 <p>
-                    <form action="{{ url_for('unfollow', username=post.author.username) }}" method="post">
+                    <form action="{{ url_for('unsubscribe', post=post_id)}}" method="post">
                         {{ form.hidden_tag() }}
-                        {{ form.submit(value='Unfollow') }}
+                        {{ form.submit(value='Unsubscribe') }}
                     </form>
                 </p>
                 {% else %}
                     <p>
-                    <form action="{{ url_for('follow', username=post.author.username) }}" method="post">
+                    <form action="{{ url_for('subscribe', post=post_id)}}" method="post">
                         {{ form.hidden_tag() }}
-                        {{ form.submit(value='Follow') }}
+                        {{ form.submit(value='Subscribe') }}
                     </form>
                 </p>
                 {% endif %}

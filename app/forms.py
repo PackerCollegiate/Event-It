@@ -5,8 +5,8 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()], render_kw={'style': 'width: 30ch'},)
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={'style': 'width: 30ch'},)
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
@@ -17,11 +17,11 @@ class EventForm(FlaskForm):
     submit = SubmitField('Create Event')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()], render_kw={'style': 'width: 30ch'},)
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'style': 'width: 30ch'},)
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={'style': 'width: 30ch'},)
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+        'Repeat Password', validators=[DataRequired(), EqualTo('password')], render_kw={'style': 'width: 30ch'},)
     submit = SubmitField('Register')
 
     def validate_username(self, username):

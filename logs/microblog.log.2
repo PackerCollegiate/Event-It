@@ -1,4 +1,4 @@
-2023-04-30 20:46:13,292 ERROR: Exception on /index [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+2023-05-23 13:18:21,462 ERROR: Exception on /subscribe/samuel [POST] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -15,9 +15,28 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 27, in index
-    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: subscribe() got an unexpected keyword argument 'username'
+2023-05-23 13:19:20,989 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 13:19:30,294 ERROR: Exception on /explore [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 45, in explore
+    return render_template("index.html", title='Explore', form=form, posts=posts.items,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 147, in render_template
     return _render(app, template, context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,13 +67,20 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/index.html", line 11, in block 'app_content'
     {% include '_post.html' %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 15, in top-level template code
-    {% if current_user.username is not post.author.username %}
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 27, in top-level template code
+    <form action="{{ url_for('subscribe', post=post.id) }}" method="post">
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.TemplateRuntimeError: No test named 'post.author.username' found.
-2023-04-30 20:46:55,897 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-30 20:53:46,999 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
-2023-04-30 20:53:48,709 ERROR: Exception on /user/samuel [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2031, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2020, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'subscribe' with values ['post']. Did you forget to specify values ['username']?
+2023-05-23 13:19:52,603 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 13:19:59,028 ERROR: Exception on /subscribe/samuel [POST] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -71,37 +97,24 @@ Traceback (most recent call last):
   File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 119, in user
-    return render_template('user.html', user=user, posts=posts.items,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 147, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/templating.py", line 130, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/user.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block 'doc'
-    {%- block html %}
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block 'html'
-    {% block body -%}
-  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block 'body'
-    {% block content -%}
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/user.html", line 34, in block 'content'
-    {% include '_post.html' %}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/smirsepahi/Documents/Code/Event-It/app/templates/_post.html", line 15, in top-level template code
-    {{ "Followed by" + user.followers.count() }}
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: can only concatenate str (not "int") to str
-2023-04-30 20:54:03,377 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+TypeError: subscribe() got an unexpected keyword argument 'username'
+2023-05-23 13:20:25,546 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-23 13:20:30,302 ERROR: Exception on /subscribe/samuel [POST] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: subscribe() got an unexpected keyword argument 'username'
+2023-05-23 13:20:53,819 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]

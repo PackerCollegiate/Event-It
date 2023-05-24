@@ -86,7 +86,6 @@ def login():
             next_page = url_for('index')
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
-@app.route('/snowman', methods=['GET', 'POST'])
 @app.route('/logout')
 def logout():
     logout_user()
@@ -175,5 +174,37 @@ def unfollow(username):
     else:
         return redirect(url_for('index'))
 
+@app.route('/subscribe/<post>', methods=['POST'])
+@login_required
+def subscribe(post):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        post = Post.query.filter_by(post=post).first()
+        if user is None:
+            flash('User {} not found.'.format(post))
+            return redirect(url_for('index'))
+        if user == current_user:
+            flash('You cannot follow yourself!')
+            return redirect(url_for('post', post=post))
+        current_user.subscribe(post)
+        db.session.commit()
+        flash('You are following {}!'.format(post))
+        return redirect(url_for('index'))
+
+@app.route('/unsubscribe/<post>', methods=['POST'])
+@login_required
+def unsubscribe(post):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(post=post_id).first()
+        if user is None:
+            flash('User {} not found.'.format(post))
+            return redirect(url_for('index'))
+        current_user.unsubscribe(post)
+        db.session.commit()
+        flash('You are not following {}.'.format(post))
+        return redirect(url_for('user', post=post_id))
+    else:
+        return redirect(url_for('index'))
 
         
