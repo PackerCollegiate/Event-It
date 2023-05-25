@@ -25,6 +25,11 @@ class User(UserMixin, db.Model):
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+    subscribed = db.relationship(
+        'Post', secondary = subscribers,
+        primaryjoin=(subscribers.c.subscriber_id == id),
+        secondaryjoin=(subscribers.c.subscribed_id == post.id),
+        backref=db.backref('subscribers', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -67,9 +72,8 @@ class User(UserMixin, db.Model):
         if self.is_subscribed(post):
             self.subscribed.remove(post)
 
-    def is_subscribed(self, user):
-        return self.subscribed.filter(
-            subscribers.c.subscribed_id == post.id).count() > 0
+    def is_subscribed(self, post):
+        return post in self.subscribed
 
     def subscribed_posts(self):
         subscribed = Post.query.join(
@@ -85,11 +89,6 @@ class Post(db.Model):
     image = db.Column(db.String(100), nullable=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    subscribed = db.relationship(
-        'User', secondary = subscribers,
-        primaryjoin=(subscribers.c.subscriber_id == id),
-        secondaryjoin=(subscribers.c.subscribed_id == id),
-        backref=db.backref('subscribers', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)

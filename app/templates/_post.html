@@ -17,14 +17,14 @@
                 {% if current_user.username != post.author.username %}
                 {% if current_user.is_following(post.author) %}
                 <p>
-                    <form action="{{ url_for('unsubscribe', post=post_id)}}" method="post">
+                    <form action="{{ url_for('unsubscribe', post_id=post.id)}}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Unsubscribe') }}
                     </form>
                 </p>
                 {% else %}
                     <p>
-                    <form action="{{ url_for('subscribe', post=post_id)}}" method="post">
+                    <form action="{{ url_for('subscribe', post_id=post.id)}}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Subscribe') }}
                     </form>

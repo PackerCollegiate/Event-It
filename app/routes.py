@@ -174,35 +174,35 @@ def unfollow(username):
     else:
         return redirect(url_for('index'))
 
-@app.route('/subscribe/<post>', methods=['POST'])
+@app.route('/subscribe/<post_id>', methods=['POST'])
 @login_required
-def subscribe(post):
+def subscribe(post_id):
     form = EmptyForm()
     if form.validate_on_submit():
-        post = Post.query.filter_by(post=post).first()
-        if user is None:
-            flash('User {} not found.'.format(post))
+        post = Post.query.filter_by(id=post_id).first()
+        if post is None:
+            flash('Post {} not found.'.format(post))
             return redirect(url_for('index'))
-        if user == current_user:
-            flash('You cannot follow yourself!')
+        if post.user_id == current_user.id:
+            flash('You cannot subscribe to your own post!')
             return redirect(url_for('post', post=post))
         current_user.subscribe(post)
         db.session.commit()
         flash('You are following {}!'.format(post))
         return redirect(url_for('index'))
 
-@app.route('/unsubscribe/<post>', methods=['POST'])
+@app.route('/unsubscribe/<post_id>', methods=['POST'])
 @login_required
-def unsubscribe(post):
+def unsubscribe(post_id):
     form = EmptyForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(post=post_id).first()
+        user = User.query.filter_by(id=post_id).first()
         if user is None:
             flash('User {} not found.'.format(post))
             return redirect(url_for('index'))
         current_user.unsubscribe(post)
         db.session.commit()
-        flash('You are not following {}.'.format(post))
+        flash('You are not subscribed to {}.'.format(post))
         return redirect(url_for('user', post=post_id))
     else:
         return redirect(url_for('index'))
