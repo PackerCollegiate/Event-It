@@ -46,6 +46,19 @@ def explore():
         if posts.has_prev else None
     return render_template("index.html", title='Explore', form=form, posts=posts.items,
                           next_url=next_url, prev_url=prev_url)
+@app.route('/followed_users')
+@login_required
+def followed_users():
+    form = EventForm()
+    page = request.args.get('page', 1, type=int)
+    posts = current_user.followed_posts().paginate(
+    page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)   
+    next_url = url_for('index', page=posts.next_num) \
+    if posts.has_next else None
+    prev_url = url_for('index', page=posts.prev_num) \
+    if posts.has_prev else None
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+
 @app.route('/create_event', methods=['GET', 'POST'])
 def create_event():
     form = EventForm()
@@ -58,20 +71,6 @@ def create_event():
         uploaded_file = request.files['file']
         uploaded_file.save(uploaded_file.filename)
     return render_template('create_event.html', title='Create Event', form=form)
-@app.route('/songs')
-def songs():
-    user = {'username': 'Samuel'}
-    songs_list = [
-        {
-            'title': 'Let It Be', 
-            'artist': 'Beetles'
-        },
-        {
-            'title': 'Billy Jean',
-            'artist': 'Michael Jackson'
-        }
-    ]
-    return render_template('songs.html', songs_list=songs_list)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

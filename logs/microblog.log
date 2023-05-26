@@ -17,3 +17,50 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: unsubscribe() missing 1 required positional argument: 'user'
 2023-05-25 21:09:32,201 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-25 21:15:58,771 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-25 21:17:30,138 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-25 21:17:39,333 ERROR: Exception on /followed_users [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 59, in followed_users
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+                                                            ^^^^
+NameError: name 'form' is not defined
+2023-05-25 21:17:55,282 ERROR: Exception on /followed_users [GET] [in /Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/microblog/venv/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/smirsepahi/Documents/Code/Event-It/app/routes.py", line 59, in followed_users
+    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+                                                            ^^^^
+NameError: name 'form' is not defined
+2023-05-25 21:18:19,349 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-25 21:18:38,335 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
+2023-05-25 21:19:43,925 INFO: Microblog startup [in /Users/smirsepahi/Documents/Code/Event-It/app/__init__.py:45]
