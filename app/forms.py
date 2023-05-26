@@ -52,7 +52,7 @@ class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
     
 class BlankForm(FlaskForm):
-    pass
+    submit = SubmitField('')
     
 class PostForm(FlaskForm):
     post = TextAreaField('Say something', validators=[

@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, EventForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, EventForm, BlankForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post
 from werkzeug.urls import url_parse
@@ -27,6 +27,19 @@ def index():
     #     if posts.has_prev else None
     # return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
     return render_template('index.html', title='Home', form=form, posts=posts)
+@app.route('/my_events')
+@login_required
+def my_events():
+    form = EventForm()
+    if form.validate_on_submit():
+        post = Post(body=form.eventName.data + ' (' + str(form.eventDate.data) + ')', author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
+    page = request.args.get('page', 1, type=int)
+    posts = current_user.posts
+    return render_template('index.html', title='Home', form=form, posts=posts)
 @app.route('/explore')
 @login_required
 def explore():
@@ -50,6 +63,12 @@ def explore():
 @login_required
 def followed_users():
     form = EventForm()
+    if form.validate_on_submit():
+        post = Post(body=form.eventName.data + ' (' + str(form.eventDate.data) + ')', author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int)
     posts = current_user.followed_posts().paginate(
     page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)   
