@@ -205,8 +205,6 @@ def unsubscribe(post_id):
         current_user.unsubscribe(post)
         db.session.commit()
         flash('You are not subscribed to {}.'.format(post))
-        return redirect(url_for('user', post=post_id))
-    else:
         return redirect(url_for('index'))
 
         
