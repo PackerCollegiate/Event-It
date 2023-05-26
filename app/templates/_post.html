@@ -15,12 +15,14 @@
                 {{ "| Followers:" }}
                 {{ post.author.followers.count() }}
                 {% if current_user.username != post.author.username %}
-                {% if current_user.is_following(post.author) %}
+                {% if current_user.subscribed_posts %}
                 <p>
+                    {% if post in current_user.subscribed_posts %}
                     <form action="{{ url_for('unsubscribe', post_id=post.id)}}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Unsubscribe') }}
                     </form>
+                    {% endif %}
                 </p>
                 {% else %}
                     <p>

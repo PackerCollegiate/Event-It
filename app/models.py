@@ -25,11 +25,6 @@ class User(UserMixin, db.Model):
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
-    subscribed = db.relationship(
-        'Post', secondary = subscribers,
-        primaryjoin=(subscribers.c.subscriber_id == id),
-        secondaryjoin=(subscribers.c.subscribed_id == post.id),
-        backref=db.backref('subscribers', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -64,23 +59,23 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+    # def subscribe(self, post):
+    #     if not self.is_subscribed(post):
+    #         self.subscribed.append(post)
     def subscribe(self, post):
-        if not self.is_subscribed(post):
-            self.subscribed.append(post)
-
+        if post not in self.subscribed_posts:
+            self.subscribed_posts.append(post)
+            #db.session.commit()
     def unsubscribe(self, post):
-        if self.is_subscribed(post):
-            self.subscribed.remove(post)
+        if post in self.subscribed_posts:
+            self.subscribed_posts.remove(post)
 
-    def is_subscribed(self, post):
-        return post in self.subscribed
-
-    def subscribed_posts(self):
-        subscribed = Post.query.join(
-            subscribed, (subscribers.c.subscribed_id == Post.post_id)).filter(
-                subscribers.c.subscribers_id == self.id)
-        own = Post.query.filter_by(user_id=self.id)
-        return subscribed.union(own).order_by(Post.timestamp.desc())
+    # def subscribed_posts(self):
+    #     subscribed = Post.query.join(
+    #         subscribed, (subscribers.c.subscribed_id == Post.post_id)).filter(
+    #             subscribers.c.subscribers_id == self.id)
+    #     own = Post.query.filter_by(user_id=self.id)
+    #     return subscribed.union(own).order_by(Post.timestamp.desc())
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 class Post(db.Model):
@@ -89,7 +84,8 @@ class Post(db.Model):
     image = db.Column(db.String(100), nullable=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    subscribed = db.relationship('User', secondary=subscribers, lazy='subquery',
+                                  backref=db.backref('subscribed_posts', lazy=True))
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 

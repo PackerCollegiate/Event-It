@@ -18,13 +18,15 @@ def index():
         flash('Your post is now live!')
         return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int)
-    posts = current_user.followed_posts().paginate(
-        page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
-    next_url = url_for('index', page=posts.next_num) \
-        if posts.has_next else None
-    prev_url = url_for('index', page=posts.prev_num) \
-        if posts.has_prev else None
-    return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    # posts = current_user.followed_posts().paginate(
+    #     page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    posts = current_user.subscribed_posts
+    # next_url = url_for('index', page=posts.next_num) \
+    #     if posts.has_next else None
+    # prev_url = url_for('index', page=posts.prev_num) \
+    #     if posts.has_prev else None
+    # return render_template('index.html', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('index.html', title='Home', form=form, posts=posts)
 @app.route('/explore')
 @login_required
 def explore():
@@ -188,7 +190,7 @@ def subscribe(post_id):
             return redirect(url_for('post', post=post))
         current_user.subscribe(post)
         db.session.commit()
-        flash('You are following {}!'.format(post))
+        flash('You are subscribed to {}!'.format(post))
         return redirect(url_for('index'))
 
 @app.route('/unsubscribe/<post_id>', methods=['POST'])
@@ -196,9 +198,9 @@ def subscribe(post_id):
 def unsubscribe(post_id):
     form = EmptyForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(id=post_id).first()
-        if user is None:
-            flash('User {} not found.'.format(post))
+        post = Post.query.filter_by(id=post_id).first()
+        if post is None:
+            flash('Post {} not found.'.format(post))
             return redirect(url_for('index'))
         current_user.unsubscribe(post)
         db.session.commit()
